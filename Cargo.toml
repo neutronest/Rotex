@@ -1,0 +1,19 @@
+[package]
+name = "Rotex"
+version = "0.1.0"
+authors = ["SenzakiUji"]
+
+description = "A deep learning framework by Rust"
+repository = "https://github.com/neutronest/Rotex"
+documentation = ""
+keywords = ["deep learning"]
+readme = "README.md"
+license = "MIT"
+
+[features]
+stats = []
+
+[dependencies]
+num = {version = "0.1.31", default-features = false }
+rand = "0.3.14"
+rulinalg = "0.1.0"
