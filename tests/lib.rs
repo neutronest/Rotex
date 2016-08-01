@@ -1,6 +1,7 @@
 extern crate rulinalg;
 extern crate num as libnum;
 extern crate rand;
+//extern crate layers::{sigmoid, softmax};
 
 pub mod linalg {
 
@@ -10,4 +11,15 @@ pub mod linalg {
     pub use rulinalg::Metric;
 }
 
-pub mod layers;
+#[test]
+fn test_rulinalg_matrix() {
+
+    println!("[Test test_rulinalg_matrix]")
+}
+
+fn test_rulinalg_vec() {
+
+    let mut vec1: linalg::Vector<f64> = linalg::Vector::<f64>::new(vec![2.0; 20]);
+    println!("{}", vec1);
+
+}

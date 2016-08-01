@@ -1,9 +1,8 @@
 // Author: neutronest
 // Status: Developing
 // the sigmoid layer
-
 use linalg::{Matrix, Vector};
-
+use layers::SimpleLayer;
 #[derive(Debug)]
 pub struct SigmoidLayer{
 
@@ -13,10 +12,10 @@ pub struct SigmoidLayer{
     bias: Vector<f64>
 }
 
-impl Layer for SigmoidLayer {
+
+impl SimpleLayer for SigmoidLayer {
 
     fn forward(input_data: Vector<f64>) -> Vector<f64> {
-        let Self::output_data = 
 
     }
 
