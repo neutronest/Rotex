@@ -1,7 +1,7 @@
 extern crate rulinalg;
 extern crate num as libnum;
-extern crate rand;
-use std::fmt;
+//extern crate rand;
+//extern crate layers::{sigmoid, softmax};
 
 pub mod linalg {
 
@@ -11,5 +11,5 @@ pub mod linalg {
     pub use rulinalg::Metric;
 }
 
-pub mod layers;
-pub mod utils;
+pub mod helper;
+
