@@ -1,47 +1,45 @@
 //
 //
 //
+
 use linalg::{Matrix, Vector};
-use distributions::{Normal, IndependentSample};
+use rand::distributions::{Normal, IndependentSample};
 use act_fn;
+use layers::{SimpleLayer};
 
-
-#[derive(debug)]
+//#[derive(debug)]
 pub struct LinearLayer {
     
-    input_size: int,
-    output_size: int,
-    weights: Matrix<f64>,
-    bias: Vector<f64>
+    pub input_size: usize,
+    pub output_size: usize,
+    pub weights: Matrix<f64>,
+    pub bias: Vector<f64>
 }
 
 
-pub fn linearlayer_init(input_size_: int,
-                    output_size_: int,
-                    init_type_: String) -> LinearLayer {
+pub fn linearlayer_init(input_size_: usize,
+                        output_size_: usize,
+                        init_type_: String) -> LinearLayer {
 
-    let mut linear_layer = {
+    let mut linear_layer = LinearLayer {
         input_size: input_size_,
         output_size: output_size_,
-        weights: match init_type_ {
+        weights: match init_type_.as_ref() {
             "normal" => {
-                let mut mat_ones = Matrix::new(input_size_,
-                                               output_size_,
-                                               vec![1.0; input_size_*output_size_]);
+                let mut mat_ones = Matrix::<f64>::new(input_size_,
+                                                      output_size_,
+                                                      vec![1.0; input_size_*output_size_]);
                 let mut mat_normal = mat_ones.apply(&act_fn::act_std_normal);
                 mat_normal
             },
-            "ones" => Matrix::new(input_size_,
-                                  output_size_,
-                                  vec![1.0; input_size_ * output_size_]),
-            "zeros" | _ => Matrix::new(input_size_,
-                                       output_size_,
-                                       vec![1.0; input_size_ * output_size_]) 
+            "one" => Matrix::<f64>::new(input_size_,
+                                         output_size_,
+                                         vec![1.0; input_size_ * output_size_]),
+            "zeros" | _ => Matrix::<f64>::new(input_size_,
+                                              output_size_,
+                                              vec![1.0; input_size_ * output_size_]) 
         },
-        bias: linalg::Matrix::new(input_size_,
-                                  output_size_,
-                                  vec![0.0; input_size_*output_size_])
-
+        bias: Vector::<f64>::new(vec![0.0; output_size_])
     };
     linear_layer
 }
@@ -51,11 +49,17 @@ pub fn linearlayer_init(input_size_: int,
 impl SimpleLayer for LinearLayer {
 
     fn forward(&mut self, input_data: Vector<f64>) -> Vector<f64> {
-        self.weights * input_data + self.bias;
+        assert_eq!(input_data.size(), self.weights.rows());
+
+        // return
+        self.weights * input_data  + self.bias
     }
 
+ 
     fn backward(&mut self, output_data_: Vector<f64>) -> Vector<f64> {
-        self.weights
+
+        // return
+        panic!()
     }
-} 
+}
 

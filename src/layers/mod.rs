@@ -1,5 +1,6 @@
 use linalg::{Matrix, Vector};
 use rand::distributions;
+pub mod linear;
 pub mod sigmoid;
 pub mod softmax;
 
