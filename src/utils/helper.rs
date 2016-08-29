@@ -1,6 +1,7 @@
 use linalg::{Matrix, Vector};
+use std::fmt;
 
-pub fn show_vector_f64(vec: &mut Vector<f64>) {
+pub fn show_vector_f64<T: fmt::Display>(vec: &mut Vector<T>) {
 
     print!("[");
     for x in (vec.data()) {
@@ -9,7 +10,7 @@ pub fn show_vector_f64(vec: &mut Vector<f64>) {
     print!("]\n");
 }
 
-pub fn show_matrix_f64(mat: &mut Matrix<f64>) {
+pub fn show_matrix_f64<T: fmt::Display> (mat: &mut Matrix<T>) {
 
     let row_num = mat.rows();
     let col_num = mat.cols();

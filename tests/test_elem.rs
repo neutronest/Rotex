@@ -22,10 +22,21 @@ fn test_elem_new_from_vector() {
 
     println!("[Test elem_new_from_vector]");
     let mut vec_a = linalg::Vector::<f64>::new(vec![2.0; 20]);
-    let mut vec_b = vec_a;
-    helper::show_vector_f64(&mut vec_b);
+    let mut elem_a = Elem::<f64>::new(ElemType::Nums, ElemField::EVector{evec: vec_a});
+    elem_a.show();
 
+}
 
-    let mut elem_a = Elem::<f64>::new(ElemType::Nums, ElemField::EVector(&vec_b));
+#[test]
+fn test_elem_new_from_matrix() {
+
+    println!("[Test elem_new_from_matrix]");
+    let mut elem_b = Elem::<f64>::new(
+        ElemType::Nums,
+        ElemField::EMatrix{
+            emat: linalg::Matrix::<f64>::new(4, 5, vec![2.0; 20])
+        }
+    );
+    elem_b.show();
 
 }
