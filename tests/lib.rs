@@ -5,8 +5,7 @@ extern crate rotex;
 
 use rotex::utils::helper;
 use rand::distributions::{Normal, IndependentSample};
-use rotex::layers::linear;
-// own lib
+
 
 
 pub mod linalg {
@@ -17,12 +16,14 @@ pub mod linalg {
     pub use rulinalg::Metric;
 }
 
+
+
 #[test]
 fn test_rulinalg_matrix() {
 
     println!("[Test test_rulinalg_matrix]");
     let mut mat1: linalg::Matrix<f64> = linalg::Matrix::<f64>::new(4, 5, vec![2.0; 20]);
-    helper::show_matrix_f64(mat1);
+    helper::show_matrix_f64(&mut mat1);
 
 }
 
@@ -30,7 +31,7 @@ fn test_rulinalg_matrix() {
 fn test_rulinalg_vec() {
 
     let mut vec1: linalg::Vector<f64> = linalg::Vector::<f64>::new(vec![2.0; 20]);
-    helper::show_vector_f64(vec1);
+    helper::show_vector_f64(&mut vec1);
 }
 
 #[test]
@@ -54,19 +55,7 @@ fn test_apply_normal_matrix() {
         let normal = Normal::new(0.0, 1.0);
         normal.ind_sample(&mut rand::thread_rng())
     };
-    let mat1 = mat1.apply(&normal_fn);
-    helper::show_matrix_f64(mat1);
+    let mut mat1 = mat1.apply(&normal_fn);
+    helper::show_matrix_f64(&mut mat1);
 
-}
-
-// ======== Layer Test ===========
-
-// Linear Layer test
-
-#[test]
-fn test_linearlayer_create() {
-
-    let mut linear_layer = linear::linearlayer_init(10, 10, "normal");
-    helper::show_matrix_f64(linear_layer.weights);
-    helper::show_matrix_f64(linear_layer.bias);
 }

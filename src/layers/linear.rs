@@ -6,7 +6,42 @@ use linalg::{Matrix, Vector};
 use rand::distributions::{Normal, IndependentSample};
 use act_fn;
 use layers::{SimpleLayer};
+use Elem::{ElemType, ElemField, Elem}
 
+
+pub struct LinearLayer<f64> {
+
+    pub m_size: usize, // input size
+    pub n_size: usize, // usize
+    pub params: &Elem<f64>, // elem with param type
+    pub bias: &Elem<f64>, // elem with param type
+}
+
+pub fn linearlayer_init(m_size_ : usize,
+                        n_size_ : usize,
+                        params_init_type: String) {
+
+    LinearLayer {
+
+        m_size: m_size_,
+        n_size: n_size_,
+        params: {
+            let mut params_mat = match params_init_type.as_ref() {
+                "normal" => {
+                    let mut mat_ones = Matrix::<f64>::new(m_size_,
+                                                          n_size_,
+                                                          vec![1.0; m_size_* n_size_]);
+
+                } // end of normal mat init
+            } // end of params_mat init
+            Elem(ElemType::Params, ElemField::EMatrix(&params_mat))
+        } // end of params init
+
+    } // end of linear layer init
+
+}
+
+/*
 //#[derive(debug)]
 pub struct LinearLayer {
     
@@ -46,9 +81,9 @@ pub fn linearlayer_init(input_size_: usize,
     
 
 
-impl SimpleLayer for LinearLayer {
+impl SimpleLayer<f64> for LinearLayer {
 
-    fn forward(&mut self, input_data: Vector<f64>) -> Vector<f64> {
+    fn forward(mut self, input_data: Vector<f64>) -> Vector<f64> {
         assert_eq!(input_data.size(), self.weights.rows());
 
         // return
@@ -56,10 +91,10 @@ impl SimpleLayer for LinearLayer {
     }
 
  
-    fn backward(&mut self, output_data_: Vector<f64>) -> Vector<f64> {
+    fn backward(mut self, output_data_: Vector<f64>) -> Vector<f64> {
 
         // return
         panic!()
     }
 }
-
+*/

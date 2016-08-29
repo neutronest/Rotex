@@ -14,3 +14,4 @@ pub mod linalg {
 pub mod layers;
 pub mod utils;
 pub mod act_fn;
+pub mod elem;

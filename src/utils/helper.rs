@@ -1,6 +1,6 @@
 use linalg::{Matrix, Vector};
 
-pub fn show_vector_f64(vec: Vector<f64>) {
+pub fn show_vector_f64(vec: &mut Vector<f64>) {
 
     print!("[");
     for x in (vec.data()) {
@@ -9,7 +9,7 @@ pub fn show_vector_f64(vec: Vector<f64>) {
     print!("]\n");
 }
 
-pub fn show_matrix_f64(mat: Matrix<f64>) {
+pub fn show_matrix_f64(mat: &mut Matrix<f64>) {
 
     let row_num = mat.rows();
     let col_num = mat.cols();
