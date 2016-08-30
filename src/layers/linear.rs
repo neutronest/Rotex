@@ -1,22 +1,55 @@
 //
 //
 //
-
 use linalg::{Matrix, Vector};
 use rand::distributions::{Normal, IndependentSample};
 use act_fn;
 use layers::{SimpleLayer};
-use Elem::{ElemType, ElemField, Elem}
+use elem::{ElemType, ElemField, Elem};
 
 
 pub struct LinearLayer<f64> {
 
     pub m_size: usize, // input size
     pub n_size: usize, // usize
-    pub params: &Elem<f64>, // elem with param type
-    pub bias: &Elem<f64>, // elem with param type
+    pub params: Elem<f64>, // elem with param type
+    pub bias: Elem<f64>, // elem with param type
 }
 
+pub fn linearlayer_init(m_size_: usize,
+                        n_size_: usize,
+                        params_: Elem<f64>,
+                        bias_: Elem<f64>) {
+
+    LinearLayer {
+        m_size: m_size_,
+        n_size: n_size_,
+        params: params_,
+        bias: bias_
+    }
+}
+
+impl SimpleLayer<f64> for LinearLayer<f64> {
+
+    fn forward(&mut self, input_data: Option<Elem<f64>>) -> Option<Elem<f64>> {
+
+        assert_eq!(self.params.elem_type, ElemType::Params);
+        assert_eq!(self.params.elem_field.etype, "matrix".to_string());
+        assert_eq!(self.bias.elem_type, ElemType::Params);
+        assert_eq!(self.bias.elem_field.etype, "vector".to_string());
+
+        
+        None
+        
+    }
+
+    fn backward(&mut self, input_data: Option<Elem<f64>>) -> Option<Elem<f64>> {
+        None
+    }
+
+}
+
+/*
 pub fn linearlayer_init(m_size_ : usize,
                         n_size_ : usize,
                         params_init_type: String) {
@@ -31,8 +64,20 @@ pub fn linearlayer_init(m_size_ : usize,
                     let mut mat_ones = Matrix::<f64>::new(m_size_,
                                                           n_size_,
                                                           vec![1.0; m_size_* n_size_]);
+                    let mut mat_normal = mat_ones.apply(&act_fn::act_std_normal);
+                    mat_normal
 
-                } // end of normal mat init
+                }, // end of normal mat init
+                "one" => {
+                    Matrix::<f64>::new(m_size_,
+                                       n_size,
+                                       vec![1.0; m_size_*n_size_])
+                },
+                "zero" => {
+                    Matrix::<f64>::new(m_size_,
+                                       n_size,
+                                       vec![0.0; m_size_*n_size_])
+                }
             } // end of params_mat init
             Elem(ElemType::Params, ElemField::EMatrix(&params_mat))
         } // end of params init
@@ -40,6 +85,7 @@ pub fn linearlayer_init(m_size_ : usize,
     } // end of linear layer init
 
 }
+*/
 
 /*
 //#[derive(debug)]

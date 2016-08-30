@@ -3,18 +3,30 @@ use linalg::{Vector, Matrix, Metric};
 use std::fmt;
 use utils::helper;
 
+
 pub enum ElemType {
 
     Params,
     Nums,
     GParams
+
 }
+
+pub enum ElemFieldType {
+
+    Matrix,
+    Vector,
+    Tensor4D
+}
+
 
 pub enum ElemField<T> {
 
-    EMatrix{emat: Matrix<T>},
-    EVector{evec: Vector<T>},
-    ETensor4D
+    EVector{etype: ElemFieldType::Vector, evec: Vector<T>},
+
+    EMatrix{etype: ElemFieldType::Matrix, emat: Matrix<T>},
+
+    ETensor4D{etype: ElemFieldType::Tensor4D}
 }
 
 pub struct Elem<T> {

@@ -1,17 +1,19 @@
 //extern crate rotex;
 use linalg::{Matrix, Vector};
 use rand::distributions;
-use elem::Elem;
-
+use elem;
+use elem::{Elem, ElemType, ElemField};
 pub mod linear;
 pub mod sigmoid;
 pub mod softmax;
 
-pub trait SimpleLayer<T> {
+use std::fmt;
 
-    fn forward(&mut self, input_data: Elem<T>) -> Elem<T>;
+pub trait SimpleLayer<T: fmt::Display> {
 
-    fn backward(&mut self, input_data: Elem<T>) -> Elem<T>;
+    fn forward(&mut self, input_data: Option<Elem<T>>) -> Option<Elem<T>>;
+
+    fn backward(&mut self, input_data: Option<Elem<T>>) -> Option<Elem<T>>;
 }
 
 
