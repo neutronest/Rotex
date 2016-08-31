@@ -5,7 +5,7 @@ use linalg::{Matrix, Vector};
 use rand::distributions::{Normal, IndependentSample};
 use act_fn;
 use layers::{SimpleLayer};
-use elem::{ElemType, ElemField, Elem};
+use elem::{Elem};
 
 
 pub struct LinearLayer<f64> {
@@ -33,14 +33,8 @@ impl SimpleLayer<f64> for LinearLayer<f64> {
 
     fn forward(&mut self, input_data: Option<Elem<f64>>) -> Option<Elem<f64>> {
 
-        assert_eq!(self.params.elem_type, ElemType::Params);
-        assert_eq!(self.params.elem_field.etype, "matrix".to_string());
-        assert_eq!(self.bias.elem_type, ElemType::Params);
-        assert_eq!(self.bias.elem_field.etype, "vector".to_string());
-
         
         None
-        
     }
 
     fn backward(&mut self, input_data: Option<Elem<f64>>) -> Option<Elem<f64>> {

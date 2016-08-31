@@ -2,7 +2,7 @@
 use linalg::{Matrix, Vector};
 use rand::distributions;
 use elem;
-use elem::{Elem, ElemType, ElemField};
+use elem::{Elem};
 pub mod linear;
 pub mod sigmoid;
 pub mod softmax;

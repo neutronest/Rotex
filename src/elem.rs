@@ -4,99 +4,38 @@ use std::fmt;
 use utils::helper;
 
 
-pub enum ElemType {
+pub enum Elem<T> {
 
-    Params,
-    Nums,
-    GParams
-
+    EVector{edata: Vector<T>},
+    EMatrix{edata: Matrix<T>},
+    ETensor4D
 }
 
-pub enum ElemFieldType {
-
-    Matrix,
-    Vector,
-    Tensor4D
-}
-
-
-pub enum ElemField<T> {
-
-    EVector{etype: ElemFieldType::Vector, evec: Vector<T>},
-
-    EMatrix{etype: ElemFieldType::Matrix, emat: Matrix<T>},
-
-    ETensor4D{etype: ElemFieldType::Tensor4D}
-}
-
-pub struct Elem<T> {
-    
-    pub elem_type: ElemType,
-
-    pub elem_field: ElemField<T>
-
-}
 
 impl<T: fmt::Display> Elem<T>  {
 
-    pub fn new(elem_type_: ElemType, elem_field_: ElemField<T>) -> Elem<T> {
+    
 
-        Elem {
-            elem_type: elem_type_,
-            elem_field: elem_field_
-        }
+    pub fn new_from_vector(mut vec: Vector<T>) -> Elem<T> {
+        Elem::EVector{edata: vec}
     }
 
-    pub fn new_from_vector(elem_type_: ElemType, mut vec: Vector<T>) -> Elem<T> {
-        Elem {
-            elem_type: elem_type_,
-            elem_field: ElemField::EVector{evec: vec}
-        }
+    pub fn new_from_matrix(mut mat: Matrix<T>) -> Elem<T>{
+        Elem::EMatrix{edata: mat}
     }
-
-    pub fn new_from_matrix(elem_type_: ElemType, mut mat: Matrix<T>) -> Elem<T>{
-        Elem {
-            elem_type: elem_type_,
-            elem_field: ElemField::EMatrix{emat: mat}
-        }
-    }
-
-    /*
-    pub get_shape(&mut self) {
-        match self.elem_field {
-
-            vec: ElemField::Vector<T> => 
-
-        }
-    }
-     */
-
 
     pub fn show(&mut self) {
 
-        match self.elem_type {
-
-            ElemType::Params => {
-                println!("type: params");
-            },
-            ElemType::Nums => {
-                println!("type: nums");
-            },
-            ElemType::GParams => {
-                println!("type: gparams");
-            }
-        };
-        match self.elem_field {
-            ElemField::EVector{ ref mut evec } => {
-                helper::show_vector_f64(evec);
+        
+        match &mut self {
+            Elem::EVector{edata: vec} => {
+                helper::show_vector(ref mut vec);
             },
 
-            ElemField::EMatrix{ ref mut emat }  => {
-                helper::show_matrix_f64(emat);
+            Elem::EMatrix {edata: mat} => {
+                helper::show_matrix(ref mut mat);
             },
-
-            ElemField::ETensor4D => {}
-
+            Elem::ETensor4D => {}
         }
     }
 }
